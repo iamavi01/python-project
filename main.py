@@ -23,7 +23,7 @@ from phonenumbers import geocoder,carrier
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty("voices")
-engine.setProperty('voice',voices[3].id) #0=david,1=mark,2=ilike//richard,3=zira
+engine.setProperty('voice',voices[0].id) #0=david,1=mark,2=ilike//richard,3=zira
 engine.setProperty('rate', 180)
 engine.setProperty('volume', 150)
 
@@ -274,7 +274,12 @@ def execution():
                 geo_request=requests.get(url)
                 geodata=geo_request.json()
                 print(geodata)
-                geo_data=''' "your current ip Address is" ,geo_request.json()["ip"],"and you are currently in ", geo_request.json()["country"], "country code is",geo_request.json()["country_code"],"timezone is",geo_request.json()["timezone"],"organization providing internet is",{geo_request.json()["organization"],"longitude=",geo_request.json()["longitude","latitude=",geo_request.json()["latitude"] '''
+                yourip=geo_request.json()["ip"]
+                country=geo_request.json()["country"]
+                internet=geo_request.json()["organization"]
+                lon=geo_request.json()["longitude"]
+                latitude=geo_request.json()["latitude"] 
+                geo_data=f"your current ip Address is {yourip}. and you are currently in {country}. organization providing internet is{internet}.longitude={lon}.latitude={latitude}"
                 print(geo_data)
                 speak(geo_data)
             elif "temperature" in query or "weather" in query or "surrounding" in query:
